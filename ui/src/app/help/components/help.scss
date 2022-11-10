@@ -3,56 +3,57 @@
 .help-box {
     min-height: 530px;
     margin: 30px 10px;
-    padding: 80px 40px;
-    text-align: center;
+    padding: 40px 40px;
     background-color: #fff;
-    box-shadow: 0 0 3px rgba(#000,.3);
-
-    &__ico {
-        width: 180px;
-        height: 180px;
-        margin: 0 auto;
-        background-size: 100%;
-        opacity: .5;
-
-        &--manual {
-            background-image: url('assets/images/User-Manual-200.png');
-        }
-
-        &--email {
-            background-image: url('assets/images/Message-200.png');
-        }
-
-        &--download {
-            background-image: url('assets/images/Download-200.png');
-        }
-    }
-
-    &__docker-logo {
-        width: 23px;
-        height: 23px;
-        vertical-align: baseline;
-    }
+    box-shadow: 0 0 3px rgba(#000, .3);
 
     h3 {
-        margin: 40px 0 60px;
+        margin: 40px 0 20px;
         font-size: 22px;
     }
 
-    a {
+    .info-box {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .cluster-box {
+        margin-left: 20px;
+    }
+
+    .doc-link {
         font-size: 18px;
         font-weight: bold;
     }
 
-    &__link {
-        display: block;
+    pre {
+        background-color: #f1f2f3;
+        padding: 18px 12px;
+        border-radius: 12px;
+
+        code {
+            background: none;
+            border: none;
+        }
     }
 
-    &__download {
-        i {
-            width: 30px;
-            font-size: 24px;
-            text-align: center;
-        }
+    .dflow-config {
+        overflow-x: scroll;
+        max-width: 900px;
+    }
+
+    .info-values {
+        margin-left: 12px;
+    }
+
+    .info-key {
+        margin-top: 9px;
+        width: 240px;
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+    .info-value {
+        margin-top: 3px;
     }
 }
