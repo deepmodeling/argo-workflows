@@ -1,5 +1,7 @@
 name: Build docker image and push to Docker Hub
 
+on: push
+
 jobs:
   build-n-push:
     name: Build docker image and push to Docker Hub
