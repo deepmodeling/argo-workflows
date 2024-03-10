@@ -2551,6 +2551,9 @@ func (woc *wfOperationCtx) executeContainer(ctx context.Context, nodeName string
 
 func (woc *wfOperationCtx) getOutboundNodes(nodeID string) []string {
 	node := woc.wf.Status.Nodes[nodeID]
+	if node.MemoizationStatus != nil && node.MemoizationStatus.Hit && (node.Type == wfv1.NodeTypeSteps || node.Type == wfv1.NodeTypeDAG) {
+		return []string{node.ID}
+	}
 	switch node.Type {
 	case wfv1.NodeTypeSkipped, wfv1.NodeTypeSuspend, wfv1.NodeTypeHTTP, wfv1.NodeTypePlugin:
 		return []string{node.ID}
