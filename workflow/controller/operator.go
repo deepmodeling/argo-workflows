@@ -2551,7 +2551,7 @@ func (woc *wfOperationCtx) executeContainer(ctx context.Context, nodeName string
 
 func (woc *wfOperationCtx) getOutboundNodes(nodeID string) []string {
 	node := woc.wf.Status.Nodes[nodeID]
-	if node.MemoizationStatus != nil && node.MemoizationStatus.Hit && (node.Type == wfv1.NodeTypeSteps || node.Type == wfv1.NodeTypeDAG) {
+	if node.MemoizationStatus != nil && node.MemoizationStatus.Hit && (node.Type == wfv1.NodeTypeSteps || node.Type == wfv1.NodeTypeDAG || node.Type == wfv1.NodeTypeRetry) {
 		return []string{node.ID}
 	}
 	switch node.Type {
@@ -2875,7 +2875,7 @@ func (woc *wfOperationCtx) processAggregateNodeOutputs(scope *wfScope, prefix st
 	outputParamValueLists := make(map[string][]string)
 	resultsList := make([]wfv1.Item, 0)
 	for _, node := range childNodes {
-		if node.Outputs == nil || node.Phase != wfv1.NodeSucceeded || node.Type == wfv1.NodeTypeRetry {
+		if node.Outputs == nil || node.Phase != wfv1.NodeSucceeded || (node.Type == wfv1.NodeTypeRetry && !(node.MemoizationStatus != nil && node.MemoizationStatus.Hit)) {
 			continue
 		}
 		if len(node.Outputs.Parameters) > 0 {
