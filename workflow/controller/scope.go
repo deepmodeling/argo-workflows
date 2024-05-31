@@ -131,7 +131,9 @@ func (s *wfScope) resolveArtifact(art *wfv1.Artifact) (*wfv1.Artifact, error) {
 			return copyArt, errors.New(errors.CodeBadRequest, "failed to unmarshal artifact subpath for templating")
 		}
 
-		return copyArt, copyArt.AppendToKey(resolvedSubPath)
+		// Ignore error caused by resolved artifact has no location
+		copyArt.AppendToKey(resolvedSubPath)
+		return copyArt, nil
 	}
 
 	return &valArt, nil
