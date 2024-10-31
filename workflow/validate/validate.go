@@ -826,7 +826,7 @@ func (ctx *templateValidationCtx) validateSteps(scope map[string]interface{}, tm
 				return errors.Errorf(errors.CodeBadRequest, "templates.%s when expression doesn't support 'expr' format '{{='. 'When' expression is only support govaluate format {{", tmpl.Name)
 			}
 
-			if step.HasExitHook() {
+			if step.HasExitHook() || step.Hooks != nil {
 				ctx.addOutputsToScope(resolvedTmpl, fmt.Sprintf("steps.%s", step.Name), scope, false, false)
 			}
 			resolvedTemplates[step.Name] = resolvedTmpl
